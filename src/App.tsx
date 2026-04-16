@@ -22,5 +22,5 @@ const App = () => (
     </TooltipProvider>
   </QueryClientProvider>
 );
-//<BrowserRouter basename={import.meta.env.BASE_URL}>
+
 export default App;
