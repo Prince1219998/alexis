@@ -7,24 +7,29 @@ import PublicationsSection from "@/components/PublicationsSection";
 import LanguagesSection from "@/components/LanguagesSection";
 import ReferencesSection from "@/components/ReferencesSection";
 import ContactSection from "@/components/ContactSection";
+import { useTranslation } from "react-i18next";
 
-const Index = () => (
-  <div className="min-h-screen">
-    <Navbar />
-    <HeroSection />
-    <SkillsSection />
-    <ExperienceSection />
-    <EducationSection />
-    <PublicationsSection />
-    <LanguagesSection />
-    <ReferencesSection />
-    <ContactSection />
-    <footer className="bg-primary py-6 text-center">
-      <p className="text-primary-foreground/50 font-sans text-sm">
-        © {new Date().getFullYear()} Alexis Bahungа — Député Provincial du Nord-Kivu
-      </p>
-    </footer>
-  </div>
-);
+const Index = () => {
+  const { t } = useTranslation();
+
+  return (
+    <div className="min-h-screen">
+      <Navbar />
+      <HeroSection />
+      <SkillsSection />
+      <ExperienceSection />
+      <EducationSection />
+      <PublicationsSection />
+      <LanguagesSection />
+      <ReferencesSection />
+      <ContactSection />
+      <footer className="bg-primary py-6 text-center">
+        <p className="text-primary-foreground/50 font-sans text-sm">
+          © {new Date().getFullYear()} Alexis Bahungа — {t("footer.title")}
+        </p>
+      </footer>
+    </div>
+  );
+};
 
 export default Index;
