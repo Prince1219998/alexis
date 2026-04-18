@@ -21,7 +21,7 @@ const Index = () => (
     <ContactSection />
     <footer className="bg-primary py-6 text-center">
       <p className="text-primary-foreground/50 font-sans text-sm">
-        © {new Date().getFullYear()} Alexis Bahunга — Député Provincial du Nord-Kivu
+        © {new Date().getFullYear()} Alexis Bahungа — Député Provincial du Nord-Kivu
       </p>
     </footer>
   </div>
