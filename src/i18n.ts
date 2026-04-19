@@ -50,7 +50,10 @@ i18n.use(initReactI18next).init({
                 role: "Député Provincial du Nord-Kivu",
                 constituency: "Élu de la Circonscription électorale du Territoire de Masisi",
                 group: "Président du Groupe Parlementaire UDPS/TSHISEKEDI",
-                since: "Assemblée Provinciale du Nord-Kivu — Depuis Janvier 2019"
+                since: "Assemblée Provinciale du Nord-Kivu — Depuis Janvier 2019",
+                constituencyLabel: "Circonscription",
+                groupLabel: "Groupe parlementaire",
+                sinceLabel: "Depuis"
             }
             },
             experience: {
@@ -244,11 +247,17 @@ i18n.use(initReactI18next).init({
                             },
                             contact: {
                                 title: "Contact",
-                                items: {
-                                    email: "Email",
-                                    phone: "Tél. principal"
-                                },
-                                socialText: "Contactez-nous ici"
+                                subtitle:
+                                    "Une question, une opportunité ou simplement envie d’échanger ? Écrivez-nous.",
+                                formTitle: "Envoyez-nous un message",
+                                name: "Nom complet *",
+                                email: "Email",
+                                subject: "Sujet *",
+                                message: "Message",
+                                messagePlaceholder: "Votre message... *",
+                                send: "Envoyer le message",
+                                sending: "Envoi en cours...",
+                                followMe: "Suivez-nous"
                                 },
                                 references: {
                                     title: "Références",
@@ -308,7 +317,10 @@ i18n.use(initReactI18next).init({
                 role: "Provincial Deputy of North Kivu",
                 constituency: "Elected representative of Masisi Territory",
                 group: "President of UDPS/TSHISEKEDI Parliamentary Group",
-                since: "North Kivu Provincial Assembly — Since January 2019"
+                since: "North Kivu Provincial Assembly — Since January 2019",
+                constituencyLabel: "Constituency",
+                groupLabel: "Parliamentary group",
+                sinceLabel: "Since"
             }
             },
             experience: {
@@ -501,11 +513,17 @@ i18n.use(initReactI18next).init({
                             },
                             contact: {
                                 title: "Contact",
-                                items: {
-                                    email: "Email",
-                                    phone: "Main phone"
-                                },
-                                socialText: "Contact us here"
+                                subtitle:
+                                    "Have a question, an opportunity, or simply want to connect? Write to us.",
+                                formTitle: "Send us a message",
+                                name: "Full name *",
+                                email: "Email",
+                                subject: "Subject *",
+                                message: "Message",
+                                messagePlaceholder: "Your message... *",
+                                send: "Send message",
+                                sending: "Sending...",
+                                followMe: "Follow us"
                                 },
                                 references: {
                                     title: "References",

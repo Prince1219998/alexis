@@ -5,23 +5,20 @@ import { useEffect, useState } from "react";
 
 const HeroSection = () => {
   const { t } = useTranslation();
-const fullName = "Alexis Bahunga";
-const [displayedName, setDisplayedName] = useState("");
+  const fullName = "Alexis Bahunga";
+  const [displayedName, setDisplayedName] = useState("");
 
-useEffect(() => {
-  let index = 0;
-
-  const interval = setInterval(() => {
-    setDisplayedName(fullName.slice(0, index + 1));
-    index++;
-
-    if (index === fullName.length) {
-      clearInterval(interval);
-    }
-  }, 100); // vitesse (plus petit = plus rapide)
-
-  return () => clearInterval(interval);
-}, []);
+  useEffect(() => {
+    let index = 0;
+    const interval = setInterval(() => {
+      setDisplayedName(fullName.slice(0, index + 1));
+      index++;
+      if (index === fullName.length) {
+        clearInterval(interval);
+      }
+    }, 100);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section
@@ -47,7 +44,6 @@ useEffect(() => {
                   className="w-full h-full object-cover"
                 />
               </div>
-
               <div
                 className="absolute -bottom-2 -right-2 w-20 h-20 rounded-full flex items-center justify-center"
                 style={{ background: "var(--gold-gradient)" }}
@@ -77,23 +73,36 @@ useEffect(() => {
               {t("hero.description")}
             </p>
 
-            <div className="flex flex-wrap justify-center lg:justify-start gap-4 text-primary-foreground/70 font-sans text-sm">
+            {/* Coordonnées améliorées */}
+            <div className="flex flex-wrap justify-center lg:justify-start gap-3">
+              {/* Email */}
               <a
                 href="mailto:alexisbanhunga@gmail.com"
-                className="flex items-center gap-2 hover:text-gold transition-colors"
+                className="group flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-4 py-2 text-sm font-sans text-primary-foreground/80 hover:bg-gold/20 hover:border-gold/50 transition-all duration-300"
               >
-                <Mail className="w-4 h-4" /> alexisbanhunga@gmail.com
+                <span className="flex items-center justify-center w-7 h-7 rounded-full bg-gold/20 text-gold group-hover:bg-gold group-hover:text-background transition-colors">
+                  <Mail className="w-3.5 h-3.5" />
+                </span>
+                <span>alexisbanhunga@gmail.com</span>
               </a>
 
+              {/* Téléphone */}
               <a
                 href="tel:+243814163471"
-                className="flex items-center gap-2 hover:text-gold transition-colors"
+                className="group flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-4 py-2 text-sm font-sans text-primary-foreground/80 hover:bg-gold/20 hover:border-gold/50 transition-all duration-300"
               >
-                <Phone className="w-4 h-4" /> +243 995 000 064
+                <span className="flex items-center justify-center w-7 h-7 rounded-full bg-gold/20 text-gold group-hover:bg-gold group-hover:text-background transition-colors">
+                  <Phone className="w-3.5 h-3.5" />
+                </span>
+                <span>+243 995 000 064</span>
               </a>
 
-              <span className="flex items-center gap-2">
-                <MapPin className="w-4 h-4" /> {t("hero.location")}
+              {/* Localisation (non cliquable) */}
+              <span className="flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-4 py-2 text-sm font-sans text-primary-foreground/80">
+                <span className="flex items-center justify-center w-7 h-7 rounded-full bg-gold/20 text-gold">
+                  <MapPin className="w-3.5 h-3.5" />
+                </span>
+                <span>{t("hero.location")}</span>
               </span>
             </div>
           </div>

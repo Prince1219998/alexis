@@ -1,11 +1,12 @@
 import { Send } from "lucide-react";
 import { FaWhatsapp, FaLinkedin, FaFacebook } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 
-const EMAILJS_SERVICE_ID = "Alexis-bahunga-Bio";
-const EMAILJS_TEMPLATE_ID = "template_xaei1hs";
+// ⚠️ Remplacez ces identifiants par les vôtres (depuis votre dashboard EmailJS)
+const EMAILJS_SERVICE_ID = "alexis_123";
+const EMAILJS_TEMPLATE_ID = "template_cmnh7tx";
 const EMAILJS_PUBLIC_KEY = "Ps4lVurXwRGXElNW9";
 
 interface SocialLink {
@@ -25,13 +26,13 @@ const socials: SocialLink[] = [
   {
     icon: FaLinkedin,
     label: "LinkedIn",
-    href : "https://www.linkedin.com/in/alexis-bahunga",
+    href: "https://www.linkedin.com/in/alexis-bahunga",
     hoverColor: "hover:text-[#0A66C2]",
   },
   {
     icon: FaFacebook,
     label: "Facebook",
-     href : "https://www.facebook.com/alexis.bahunga",
+    href: "https://www.facebook.com/alexis.bahunga",
     hoverColor: "hover:text-[#1877F2]",
   },
 ];
@@ -44,6 +45,18 @@ const ContactSection = () => {
     type: "success" | "error";
     message: string;
   } | null>(null);
+  
+  // Référence pour stocker le timeout
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Nettoyer le timeout au démontage du composant
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -55,8 +68,10 @@ const ContactSection = () => {
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
         formRef.current!,
-        EMAILJS_PUBLIC_KEY,
+        EMAILJS_PUBLIC_KEY
       );
+      
+      // Afficher le message de succès
       setFeedback({
         type: "success",
         message: t("contact.success", {
@@ -64,6 +79,13 @@ const ContactSection = () => {
         }),
       });
       formRef.current?.reset();
+      
+      // Programmer la disparition après 2 secondes
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      timeoutRef.current = setTimeout(() => {
+        setFeedback(null);
+      }, 2000);
+      
     } catch (error) {
       console.error("EmailJS error:", error);
       setFeedback({
@@ -73,6 +95,13 @@ const ContactSection = () => {
             "Erreur d'envoi. Veuillez réessayer ou utiliser un autre moyen de contact.",
         }),
       });
+      
+      // Programmer la disparition après 2 secondes aussi pour l'erreur
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      timeoutRef.current = setTimeout(() => {
+        setFeedback(null);
+      }, 2000);
+      
     } finally {
       setIsSending(false);
     }
@@ -89,13 +118,13 @@ const ContactSection = () => {
           <div className="gold-bar mx-auto" />
           <p className="text-muted-foreground font-sans text-sm md:text-base mt-5 max-w-xl mx-auto leading-relaxed">
             {t("contact.subtitle", {
-              defaultValue:
-                "Une question, une opportunité ou simplement envie d'échanger ? Écrivez-moi.",
-            })}
+            defaultValue:
+              "Une question, une opportunité ou simplement envie d’échanger ? Écrivez-nous.",
+          })}
           </p>
         </div>
 
-        {/* Form */}
+        {/* Formulaire */}
         <div className="bg-card border border-border rounded-xl p-6 md:p-8 relative overflow-hidden">
           <span
             aria-hidden
@@ -108,32 +137,44 @@ const ContactSection = () => {
             })}
           </h3>
 
-          <form ref={formRef} onSubmit={handleSubmit} className="space-y-3">
+          <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+            {/* Ligne avec Nom et Email côte à côte */}
             <div className="grid md:grid-cols-2 gap-3">
               <input
                 type="text"
                 name="user_name"
                 required
                 aria-label={t("contact.name", { defaultValue: "Nom" })}
-                className="w-full bg-background border border-border rounded-sm px-3 py-2 text-sm text-foreground font-sans placeholder:text-muted-foreground/60 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/40 transition-colors"
-                placeholder={t("contact.name", { defaultValue: "Nom" }) + " *"}
+                className="w-full bg-background border border-border rounded-sm px-4 py-3 text-sm text-foreground font-sans placeholder:text-muted-foreground/60 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/40 transition-colors"
+                placeholder={t("contact.name", { defaultValue: "Nom complet *" })}
               />
               <input
                 type="email"
                 name="user_email"
                 required
                 aria-label={t("contact.email", { defaultValue: "Email" })}
-                className="w-full bg-background border border-border rounded-sm px-3 py-2 text-sm text-foreground font-sans placeholder:text-muted-foreground/60 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/40 transition-colors"
+                className="w-full bg-background border border-border rounded-sm px-4 py-3 text-sm text-foreground font-sans placeholder:text-muted-foreground/60 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/40 transition-colors"
                 placeholder="email@exemple.com *"
               />
             </div>
 
+            {/* Sujet */}
+            <input
+              type="text"
+              name="user_subject"
+              required
+              aria-label={t("contact.subject", { defaultValue: "Sujet" })}
+              className="w-full bg-background border border-border rounded-sm px-4 py-3 text-sm text-foreground font-sans placeholder:text-muted-foreground/60 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/40 transition-colors"
+              placeholder={t("contact.subject", { defaultValue: "Sujet *" })}
+            />
+
+            {/* Message */}
             <textarea
               name="message"
               required
               rows={5}
               aria-label={t("contact.message", { defaultValue: "Message" })}
-              className="w-full bg-background border border-border rounded-sm px-3 py-2 text-sm text-foreground font-sans placeholder:text-muted-foreground/60 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/40 transition-colors resize-none"
+              className="w-full bg-background border border-border rounded-sm px-4 py-3 text-sm text-foreground font-sans placeholder:text-muted-foreground/60 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/40 transition-colors resize-none"
               placeholder={t("contact.messagePlaceholder", {
                 defaultValue: "Votre message... *",
               })}
@@ -142,16 +183,16 @@ const ContactSection = () => {
             <button
               type="submit"
               disabled={isSending}
-              className="w-full inline-flex items-center justify-center gap-2 bg-gold hover:bg-gold/90 text-background font-sans font-semibold text-sm tracking-wider uppercase py-2.5 px-4 rounded-md transition-all hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:translate-y-0"
+              className="w-full inline-flex items-center justify-center gap-2 bg-gold hover:bg-gold/90 text-background font-sans font-semibold text-sm tracking-wider uppercase py-3 px-4 rounded-md transition-all hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:translate-y-0"
             >
               {isSending ? (
                 <span className="animate-pulse">
-                  {t("contact.sending", { defaultValue: "Envoi..." })}
+                 {t("contact.sending", { defaultValue: "Envoi en cours..." })}
                 </span>
               ) : (
                 <>
                   <Send className="w-4 h-4" />
-                  {t("contact.send", { defaultValue: "Envoyer" })}
+                 {t("contact.send", { defaultValue: "Envoyer le message" })}
                 </>
               )}
             </button>
@@ -171,10 +212,10 @@ const ContactSection = () => {
           </form>
         </div>
 
-        {/* Socials - icônes compactes sans contour */}
+        {/* Liens sociaux */}
         <div className="mt-8 flex flex-col items-center gap-4">
           <span className="text-xs font-sans uppercase tracking-[0.2em] text-muted-foreground">
-            {t("contact.followMe", { defaultValue: "Suivez-nous" })}
+           {t("contact.followMe", { defaultValue: "Suivez-nous" })}
           </span>
           <div className="flex items-center gap-6">
             {socials.map((s) => {
