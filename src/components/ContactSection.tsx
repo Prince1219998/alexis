@@ -104,7 +104,7 @@ const ContactSection = () => {
 
           <h3 className="text-lg md:text-xl font-serif font-bold text-foreground tracking-tight mb-5 text-center">
             {t("contact.formTitle", {
-              defaultValue: "Envoyez-moi un message",
+              defaultValue: "Envoyez-nous un message",
             })}
           </h3>
 
@@ -174,7 +174,7 @@ const ContactSection = () => {
         {/* Socials - icônes compactes sans contour */}
         <div className="mt-8 flex flex-col items-center gap-4">
           <span className="text-xs font-sans uppercase tracking-[0.2em] text-muted-foreground">
-            {t("contact.followMe", { defaultValue: "Suivez-moi" })}
+            {t("contact.followMe", { defaultValue: "Suivez-nous" })}
           </span>
           <div className="flex items-center gap-6">
             {socials.map((s) => {

@@ -65,7 +65,7 @@ useEffect(() => {
               {t("hero.role")}
             </p>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-4 leading-tight">
+            <h1 className="text-2xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-4 leading-tight">
               {displayedName.split(" ").map((word, i) => (
                 <span key={i} className={i === 1 ? "text-gradient-gold" : ""}>
                   {word}{" "}
