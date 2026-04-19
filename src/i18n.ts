@@ -148,7 +148,10 @@ i18n.use(initReactI18next).init({
                         desc: "Représenter l'organisation auprès des partenaires, coordonner les activités, faire une planification stratégique et opérationnelle, élaborer le budget et faire le suivi de son exécution."
                     }
                     ]
-                }
+                },
+                showMore: "Voir plus",
+                showLess: "Voir moins"
+                
                 },
                 education: {
                     title: "Formation académique",
@@ -403,7 +406,9 @@ i18n.use(initReactI18next).init({
                         desc: "Represented the organization before partners, coordinated activities, carried out strategic and operational planning, developed the budget, and monitored its implementation."
                     }
                     ]
-                }
+                },
+                showMore: "Show more",
+                showLess: "Show less"
                 },
                 education: {
                     title: "Academic Education",

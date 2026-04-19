@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Loader2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [isChangingLang, setIsChangingLang] = useState(false);
   const { t, i18n } = useTranslation();
 
   const links = [
@@ -15,10 +16,23 @@ const Navbar = () => {
     { label: t("navbar.contact"), href: "#contact" },
   ];
 
-  const toggleLanguage = () => {
-    const newLanguage = i18n.language === "fr" ? "en" : "fr";
+ const toggleLanguage = () => {
+  if (isChangingLang) return;
+
+  setIsChangingLang(true);
+  document.body.classList.add("lang-switching");
+
+  const newLanguage = i18n.language === "fr" ? "en" : "fr";
+
+  setTimeout(() => {
     i18n.changeLanguage(newLanguage);
-  };
+
+    setTimeout(() => {
+      document.body.classList.remove("lang-switching");
+      setIsChangingLang(false);
+    }, 250);
+  }, 300);
+};
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-md border-b border-primary-foreground/10">
@@ -40,18 +54,31 @@ const Navbar = () => {
 
           <button
             onClick={toggleLanguage}
-            className="text-sm font-sans px-3 py-1 rounded border border-primary-foreground/20 text-primary-foreground/70 hover:text-gold hover:border-gold transition-colors"
+            disabled={isChangingLang}
+            className="text-sm font-sans px-3 py-1 rounded border border-primary-foreground/20 text-primary-foreground/70 hover:text-gold hover:border-gold transition-colors disabled:opacity-70 disabled:cursor-not-allowed flex items-center gap-2 min-w-[64px] justify-center"
           >
-            {i18n.language === "fr" ? "EN" : "FR"}
+            {isChangingLang ? (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin" />
+                ...
+              </>
+            ) : (
+              i18n.language === "fr" ? "EN" : "FR"
+            )}
           </button>
         </div>
 
         <div className="md:hidden flex items-center gap-3">
           <button
             onClick={toggleLanguage}
-            className="text-xs font-sans px-2 py-1 rounded border border-primary-foreground/20 text-primary-foreground/70 hover:text-gold hover:border-gold transition-colors"
+            disabled={isChangingLang}
+            className="text-xs font-sans px-2 py-1 rounded border border-primary-foreground/20 text-primary-foreground/70 hover:text-gold hover:border-gold transition-colors disabled:opacity-70 disabled:cursor-not-allowed flex items-center gap-1 min-w-[48px] justify-center"
           >
-            {i18n.language === "fr" ? "EN" : "FR"}
+            {isChangingLang ? (
+              <Loader2 className="w-3 h-3 animate-spin" />
+            ) : (
+              i18n.language === "fr" ? "EN" : "FR"
+            )}
           </button>
 
           <button

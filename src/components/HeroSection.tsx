@@ -1,9 +1,27 @@
 import profileImg from "@/assets/profile-placeholder.jpg";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
 
 const HeroSection = () => {
   const { t } = useTranslation();
+const fullName = "Alexis Bahunga";
+const [displayedName, setDisplayedName] = useState("");
+
+useEffect(() => {
+  let index = 0;
+
+  const interval = setInterval(() => {
+    setDisplayedName(fullName.slice(0, index + 1));
+    index++;
+
+    if (index === fullName.length) {
+      clearInterval(interval);
+    }
+  }, 100); // vitesse (plus petit = plus rapide)
+
+  return () => clearInterval(interval);
+}, []);
 
   return (
     <section
@@ -15,7 +33,7 @@ const HeroSection = () => {
         <div className="absolute bottom-20 left-10 w-40 h-40 rounded-full border border-gold/20" />
       </div>
 
-      <div className="container mx-auto px-4 md:px-8 relative z-10">
+      <div className="container mx-auto px-4 md:px-8 relative z-10 animate-fade-in">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
           {/* Photo */}
           <div className="flex-shrink-0 mt-20 md:mt-0">
@@ -48,7 +66,11 @@ const HeroSection = () => {
             </p>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-4 leading-tight">
-              Alexis <span className="text-gradient-gold">Bahunga</span>
+              {displayedName.split(" ").map((word, i) => (
+                <span key={i} className={i === 1 ? "text-gradient-gold" : ""}>
+                  {word}{" "}
+                </span>
+              ))}
             </h1>
 
             <p className="text-sm md:text-base text-primary-foreground/80 font-sans leading-relaxed mb-6 text-justify">
