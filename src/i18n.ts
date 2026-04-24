@@ -17,7 +17,7 @@ i18n.use(initReactI18next).init({
         },
         hero: {
           imageAlt: "Alexis Bahunga - Député Provincial",
-          role: "Député Provincial du Nord-Kivu",
+          role: "Député Provincial du Nord-Kivu | Chercheur | Homme politique",
           description:
             "Politologue de formation, doctorant à l’Université de Kinshasa en Sciences Politiques et Administratives, et titulaire d’un Master en Gouvernance, Défense et Sécurité de l’Université de Goma, il a également suivi plusieurs autres formations complémentaires. Ce parcours lui a permis d’élargir ses compétences à divers domaines, notamment les finances publiques, les institutions financières, le droit fiscal, la logistique et la sécurité. Il justifie de 19 années d’expérience dans les secteurs public et privé, particulièrement en gestion des administrations fiscales, des finances publiques, de l’administration publique, des institutions financières, de la gestion des conflits et de la gouvernance des organisations non gouvernementales. Sa formation en gouvernance, défense et sécurité lui confère également une bonne capacité d’analyse et d’appréhension du contexte sécuritaire.",
           location: "Goma, Nord-Kivu, RDC"
@@ -284,7 +284,7 @@ i18n.use(initReactI18next).init({
         },
         hero: {
           imageAlt: "Alexis Bahunga - Provincial Deputy",
-          role: "Provincial Deputy of North Kivu",
+          role: "Provincial Deputy of North Kivu | Researcher | Politician",
           description:
             "A trained political scientist and PhD candidate in Political and Administrative Sciences at the University of Kinshasa, he holds a Master's degree in Governance, Defense and Security from the University of Goma, along with several additional trainings. This background has enabled him to broaden his expertise across various fields, including public finance, financial institutions, tax law, logistics, and security. He has 19 years of experience in both the public and private sectors, particularly in the management of tax administrations, public finance, public administration, financial institutions, conflict management, and the governance of non-governmental organizations. His academic background in governance, defense, and security also provides him with a strong capacity to analyze and understand complex security environments",
           location: "Goma, North Kivu, DRC"
